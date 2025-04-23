@@ -39,7 +39,7 @@ def setup_vector_store(split_docs, embedder):
 
 def generate_steps(client, user_query):
     """Break out the user query into multiple smaller steps"""
-    FAN_OUT_SYSTEM_PROMPT = """
+    GENERATE_STEPS_SYSTEM_PROMPT = """
     You are a helpful assistant. You will be provided with a question and you need to break it into 3 simpler & sequential steps to solve the problem. What steps do you think would be best to solve the problem?
 
     Rules:
@@ -55,7 +55,7 @@ def generate_steps(client, user_query):
         model="gemini-1.5-flash",
         response_format={"type": "json_object"},
         messages=[
-            {"role": "system", "content": FAN_OUT_SYSTEM_PROMPT},
+            {"role": "system", "content": GENERATE_STEPS_SYSTEM_PROMPT},
             {
                 "role": "user",
                 "content": user_query
